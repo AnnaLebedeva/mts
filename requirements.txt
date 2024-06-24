@@ -1,0 +1,3 @@
+accelerate @ git+https://github.com/huggingface/accelerate.git
+transformers==4.41.2
+bitsandbytes==0.43.1
