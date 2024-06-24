@@ -19,3 +19,20 @@ The result looks like this:
 
 [llama-2]: <https://arxiv.org/abs/2307.09288>
 [this]: <https://huggingface.co/Trelis/Llama-2-7b-chat-hf-function-calling-v2>
+
+## How to use:
+
+Clone the repository:
+
+`git clone https://github.com/AnnaLebedeva/mts.git`
+
+Install the necessary dependencies:
+
+`pip install requirements.txt`
+
+Run the assistant.py file:
+
+`python assistant.py`
+
+By default it is set that you use GPU like A100. If you use cpu, please open `assistant.py` file and change the `runtime` for `"cpu"`.
+Also, if you use colab and T4, please also open `assistant.py` file and change the `torch_dtype` for `float16`.
