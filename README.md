@@ -5,7 +5,7 @@ One way to implement the searching into generative network is so called function
 Since the task required using open-source model with not more than 7B parameters, I chose [llama-2].
 Llama 2 is an auto-regressive language model that uses an optimized transformer architecture.
 To add the capability of function calling, the model needs to be fine-tuned in such a way that, getting a certain user prompt,
-it returns a structured json object that contains SOMETHING
+it returns a structured json object.
 
 I did not fine-tune the model myself since I had limited free colab resources. Instead I used [this] model, which is already fine-tuned
 for function calling. It requires creating a string called `functionList` that contains list of functions with the following requisites:
