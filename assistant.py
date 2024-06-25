@@ -3,6 +3,12 @@ import json
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import re
 import os
+import argparse
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--runtime')
+parser.add_argument('--gputype')
 
 def gpu_or_cpu(runtime):  # OR "cpu"
     
@@ -21,7 +27,10 @@ def gpu_or_cpu(runtime):  # OR "cpu"
 
 model_id = "Trelis/Llama-2-7b-chat-hf-function-calling-v2"
 
-runtime = "gpu"
+
+gputype = None
+args = parser.parse_args()
+runtime = args.runtime
 
 if runtime == "gpu":
     
@@ -34,16 +43,34 @@ if runtime == "gpu":
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.bfloat16,
     )
-    model = AutoModelForCausalLM.from_pretrained(
+
+    if args.gputype == 'a100':
+        
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            quantization_config=bnb_config,
+            device_map='auto',
+            trust_remote_code=True,
+            cache_dir='',
+    #         cache_dir=cache_dir, #in case you have enough space and want to reuse it
+            torch_dtype=torch.bfloat16 #if on an A100 or Ampere architecture GPU,
+            )
+        
+    elif args.gputype == 't4':
+        
+        model = AutoModelForCausalLM.from_pretrained(
         model_id,
         quantization_config=bnb_config,
         device_map='auto',
         trust_remote_code=True,
         cache_dir='',
 #         cache_dir=cache_dir, #in case you have enough space and want to reuse it
-        torch_dtype=torch.bfloat16 #if on an A100 or Ampere architecture GPU,
-#         torch_dtype=torch.float16, #if on a T4
+        torch_dtype=torch.float16, #if on a T4
         )
+        
+    else:
+        sys.exit('Please specify the GPU type')
+        
     # Not possible to use bits and bytes if using cpu only,
 else:
     model = AutoModelForCausalLM.from_pretrained(model_id, device_map=gpu_or_cpu(runtime), trust_remote_code=True)
