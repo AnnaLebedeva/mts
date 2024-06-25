@@ -45,6 +45,7 @@ If I were to have more computational resources && time, here's what can be done 
    - _system prompt_ that includes metadata about available functions;
    - _user prompt_ that contains the input;
    - _assistantResponse_, a.k.a. the model's expected output.
+     
 The dataset should include examples where the function metadata is present but no function is called, and also examples where function calls are necessary.
 Also, the dataset may contain examples where the model asks for additional info if the input lacks info on date, city of departure, etc.
 
