@@ -24,15 +24,16 @@ The result looks like this:
 
 Clone the repository:
 
-`git clone https://github.com/AnnaLebedeva/mts.git`
+    git clone https://github.com/AnnaLebedeva/mts.git
 
-Install the necessary dependencies:
+Go to folder and install the necessary dependencies:
 
-`pip install requirements.txt`
+    cd mts
+    pip install -r requirements.txt
 
-Run the assistant.py file:
+Run the assistant.py file. Please specify which devide you use by setting `--runtime` option to `gpu` or `cpu`.
+If you use gpu, please set the option `--gputype` for either `a100` or `t4`(for colab).
+Example of command if you use gpu a100:
 
-`python assistant.py`
+    python assistant.py --runtime gpu --gputype a100
 
-By default it is set that you use GPU like A100. If you use cpu, please open `assistant.py` file and change the `runtime` for `"cpu"`.
-Also, if you use colab and T4, please also open `assistant.py` file and change the `torch_dtype` for `float16`.
