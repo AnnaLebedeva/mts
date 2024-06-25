@@ -56,4 +56,4 @@ Also, the dataset may contain examples where the model asks for additional info 
    2) requires calling of search function
    3) requires calling of booking function
       
-And then it is possible to measure some score such as f1.
+And then it is possible to measure a classification score such as F1.
