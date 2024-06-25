@@ -7,8 +7,8 @@ import argparse
 import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--runtime')
-parser.add_argument('--gputype')
+parser.add_argument('--runtime', choices=['cpu', 'gpu'])
+parser.add_argument('--gputype', choices=['a100', 't4'])
 
 def gpu_or_cpu(runtime):  # OR "cpu"
     
