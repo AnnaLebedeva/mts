@@ -37,3 +37,21 @@ Example of command if you use gpu a100:
 
     python assistant.py --runtime gpu --gputype a100
 
+## Future work
+
+If I were to have more computational resources && time, here's what can be done to improve the quality of the model:
+
+1. Generate the dataset that will meet all our needs. The dataset may consist of 3 columns:
+   - _system prompt_ that includes metadata about available functions;
+   - _user prompt_ that contains the input;
+   - _assistantResponse_, a.k.a. the model's expected output.
+The dataset should include examples where the function metadata is present but no function is called, and also examples where function calls are necessary.
+Also, the dataset may contain examples where the model asks for additional info if the input lacks info on date, city of departure, etc.
+
+2. Fine-tune the model on this dataset, maybe using LoRA adapters.
+
+3. Evaluation dataset may include propmts together with their outputs' corresponding classes:
+   1) does not require function call
+   2) requires calling of search function
+   3) requires calling of booking function
+And then it is possible to measure some score such as f1.
